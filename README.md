@@ -55,7 +55,49 @@ rest api endpoint is exposed (flask api) to fetch the records from db/backend.
 7. addition of poetry
 
 
+## async call 
 
+### kafka : we could a simpler version of aiokafka
+
+    ```
+    consumer.py
+    
+    consumer = aiokafka.AIOKafkaConsumer(
+    "user_events",
+    bootstrap_servers='localhost:9092',
+    enable_auto_commit=True,       # Is True by default anyway
+    auto_commit_interval_ms=1000,  # Autocommit every second
+    auto_offset_reset="earliest or latest",  # If committed offset not found, start from beginning and using latest control the offset
+                                   
+    )
+    await consumer.start()
+    try:
+      async for msg in consumer:
+        print(
+            "{}:{:d}:{:d}: key={} value={} timestamp_ms={}".format(
+                msg.topic, msg.partition, msg.offset, msg.key, msg.value,
+                msg.timestamp)
+        )
+    finally:
+    await consumer.stop()
+    # warning : careful ConsumerRebalanceListener to avoid deadlocks. The Consumer will await the defined handlers and will block subsequent calls
+    ```
+
+### rest api : for get operation for user 
+    ```
+        def get_tasks(session):
+            tasks = []
+            for users in users:
+                tasks.append(session.get(url.format(users, api_key), ssl=False))
+            return tasks
+        async def get_users():
+            async with aiohttp.ClientSession() as session:
+                tasks = get_tasks(session)
+                responses = await asyncio.gather(*tasks)
+        asyncio.run(get_symbols())
+    
+    #Note : fast api does provide good supprt with for async calls ( need to explore)
+    ```
 
 
 
