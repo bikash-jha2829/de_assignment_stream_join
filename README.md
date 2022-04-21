@@ -43,8 +43,17 @@ rest api endpoint is exposed (flask api) to fetch the records from db/backend.
         integration test case for kafka
         test case for postgres and upsert logic.
         
-        
+     
+## Overall improvement points:
+1. use of spark streaming to join streams 
+2. Postgres database modeeling (good to have a delta tables {raw schema} and perform upsert operation )
+3. MIcroservices layer ( need to add service k8s yaml file)
+#### priority 1 improvements
+4. Add more test cases for rest api and make rest api resilient
+5. watermarking and checkpointing of kafka streams **
 
-    
+
+
+
 
 
