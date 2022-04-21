@@ -1,0 +1,12 @@
+# This file defines the additional requirements for a developer working
+# with this project (e.g. for testing or useful development tools).
+# The regular project dependencies are defined in environment.yml
+channels:
+  - defaults
+dependencies:
+  - python=3.6.*
+  - pytest=6.*
+  - pytest-cov=2.*
+  - pre-commit=2.*
+  - black=21.*
+  - pandas

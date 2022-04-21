@@ -1,0 +1,13 @@
+# log configuration for kafka_queue
+kafka:
+  servers: "localhost:9092"
+  groupid: "GRP1"
+  timeout: 6000
+  offset_reset: "earliest"
+
+postgres:
+  host: "localhost"
+  port: "5432"
+  user: "postgres"
+  password: "postgres"
+  database: "postgres"
