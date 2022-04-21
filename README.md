@@ -39,9 +39,12 @@ rest api endpoint is exposed (flask api) to fetch the records from db/backend.
        **custom_logger** : used custom logger to enable the logging message and info/error/debug option to a granualar level of a methods inside the class or flie path
                          if we are using kubernetes in future it will enable to pass method and logging level( since this is just an exercise I put the basic function)
                          
-      
- 
- 
+### tests: 
+        integration test case for kafka
+        test case for postgres and upsert logic.
+        
+        
+
     
 
 
