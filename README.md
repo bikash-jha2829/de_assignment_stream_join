@@ -21,13 +21,27 @@ rest api endpoint is exposed (flask api) to fetch the records from db/backend.
 # Code Walkthrough
 ### src: kafka_queue module 
    **kafka_handlers.py** : it is triggered when we call the kafka subscribe for different events , for example handle_user_events is triggred when we consume user_events from kafka-topic : user_events
+   
    **kafka_io.py**  :  kafka logic of creation of topic producer and consumer is written
    
 **postgre_etl** : modelling :  contains sql codes for creation of tables
-                  postgre_op.py : contains the upsert(_update if exists else insert_)  and insert logic to load data in postgres tables.
-                  postgres_init : create a connection parameter for postgres
+                 
+                 _postgre_op.py_ : contains the upsert(_update if exists else insert_)  and insert logic to load data in postgres tables.
+                 
+                 _postgres_init_ : create a connection parameter for postgres
 
-   
+ **pub_sub_main.py** : used ray library to run kafka producer and kafka consumer in parallel  and create topic if not exists.
+ 
+ **output_api_endpoint** : make http call to _/users/<string:name>_  it call the get_user method of PostgreETL class and query postgresDB to fetch the users.
+ 
+ ### utils :
+       **utils.py** : basic load_yaml and run_postgre_query, upsert_logic
+       **custom_logger** : used custom logger to enable the logging message and info/error/debug option to a granualar level of a methods inside the class or flie path
+                         if we are using kubernetes in future it will enable to pass method and logging level( since this is just an exercise I put the basic function)
+                         
+      
+ 
+ 
     
 
 
