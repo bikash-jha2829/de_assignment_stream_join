@@ -17,4 +17,17 @@ rest api endpoint is exposed (flask api) to fetch the records from db/backend.
     Microservices : i. sparkonk8s-operator to run spark job 
                     ii. Flask restful app
                     iii. service-discovery to pass ini of kafka and postgres
-                    
+
+# Code Walkthrough
+### src: kafka_queue module 
+   **kafka_handlers.py** : it is triggered when we call the kafka subscribe for different events , for example handle_user_events is triggred when we consume user_events from kafka-topic : user_events
+   **kafka_io.py**  :  kafka logic of creation of topic producer and consumer is written
+   
+**postgre_etl** : modelling :  contains sql codes for creation of tables
+                  postgre_op.py : contains the upsert(_update if exists else insert_)  and insert logic to load data in postgres tables.
+                  postgres_init : create a connection parameter for postgres
+
+   
+    
+
+
